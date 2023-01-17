@@ -99,7 +99,6 @@ const indexSettings = {
 
 async function run() {
   const exists = await client.indices.exists({index: INDEX_NAME});
-  console.log(exists)
   if (exists) return;
   await client.indices.create(indexSettings, { ignore: [400] });
   
