@@ -36,7 +36,7 @@ const indexSettings = {
           },
           analyzerCaseInsensitive: {
             tokenizer: 'whitespace',
-            filter: ['lowercase', 'customStopWordFilter'],
+            filter: ['lowercase', 'customStopWordFilter','customNgramFilter'],
           },
         },
         filter: {

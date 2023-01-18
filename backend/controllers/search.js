@@ -2,7 +2,9 @@ const { Client } = require('@elastic/elasticsearch');
 const fs = require('fs');
 
 const keywords = require('../data/keywords.json');
-const { artist_names, lyricist_names } = require('../data/entities.json');
+let { artist_names, lyricist_names } = require('../data/entities.json');
+artist_names = artist_names.map((name) => name.toLowerCase());
+lyricist_names = lyricist_names.map((name) => name.toLowerCase());
 
 const client = new Client({
   node: process.env.ELASTIC_NODE_URL,
@@ -20,7 +22,7 @@ const INDEX_NAME = process.env.INDEX_NAME;
 
 const search = async (req, res) => {
   let { query } = req.body;
-  const queryWords = query.trim().split(/\s+/);
+  const queryWords = query.trim().toLowerCase().split(/\s+/);
 
   const removingQueryWords = [];
 
@@ -32,8 +34,8 @@ const search = async (req, res) => {
   let bArtist = 1;
   let bLyrics = 1;
   let bLyricist = 1;
-  let b_album = 1;
-  let b_metaphor = 1;
+  let bAlbum = 1;
+  let bMetaphor = 1;
   let bMeaning = 1;
   let bSource = 1;
   let bTarget = 1;
@@ -47,9 +49,11 @@ const search = async (req, res) => {
     fieldType = 'best_fields';
   } else {
     fieldType = 'cross_fields';
-    queryWords.forEach((word) => {
+
+    for (let word of queryWords) {
       word = word.replace('ගේ', '');
       word = word.replace("'s", '');
+      console.log(word);
       word = word.replace('යන්ගේ', '');
       if (artist_names.includes(word)) {
         bArtist = bArtist + 1;
@@ -87,7 +91,7 @@ const search = async (req, res) => {
         range = parseInt(word);
         removingQueryWords.push(word);
       }
-    });
+    }
   }
   if (range == 0 && sorting > 0) {
     size = 10;
@@ -118,21 +122,21 @@ const search = async (req, res) => {
           'source',
           'target',
           'releasedYear',
-          'id'
+          'id',
         ],
       },
       sort: sortMethod,
       query: {
         multi_match: {
-          query: query.trim(),
+          query: query.trim().toLowerCase(),
           type: fieldType,
           fields: [
             'artist^' + bArtist,
             'lyrics^' + bLyrics,
             'title^' + bTitle,
             'lyricist^' + bLyricist,
-            'album^' + b_album,
-            'metaphor^' + b_metaphor,
+            'album^' + bAlbum,
+            'metaphor^' + bMetaphor,
             'meaning^' + bMeaning,
             'source^' + bSource,
             'target^' + bTarget,
@@ -175,7 +179,7 @@ const search = async (req, res) => {
     },
   };
 
-  console.log(JSON.stringify(searchParams, null, 2))
+  console.log(JSON.stringify(searchParams, null, 2));
   const response = await client.search(searchParams);
   // console.log(JSON.stringify(response, null, 2));
   return res.status(200).json({ response });
