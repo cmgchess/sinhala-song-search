@@ -53,7 +53,6 @@ const search = async (req, res) => {
     for (let word of queryWords) {
       word = word.replace('ගේ', '');
       word = word.replace("'s", '');
-      console.log(word);
       word = word.replace('යන්ගේ', '');
       if (artist_names.includes(word)) {
         bArtist = bArtist + 1;
