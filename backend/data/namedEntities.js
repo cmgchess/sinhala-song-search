@@ -3,17 +3,24 @@ const fs = require('fs');
 
 const artists = songs.map((song) => song.artist).filter((x) => x !== null);
 const lyricists = songs.map((song) => song.lyricist).filter((x) => x !== null);
-const splittedNames = artists.flatMap((artist) => artist.split(' '));
-const splittedLyricists = lyricists.flatMap((lyricist) => lyricist.split(' '));
-const combined = [...splittedLyricists, ...splittedNames]
+const splittedNames = artists
+  .flatMap((artist) => artist.split(' '))
   .filter((x) => !['and', ''].includes(x))
-  .filter((x) => {
-    // const lastLetter = x.charAt(x.length - 1);
-    return x.length > 2;
-  });
-const unique = [...new Set(combined)];
+  .filter((x) => x.length > 2);
+const splittedLyricists = lyricists
+  .flatMap((lyricist) => lyricist.split(' '))
+  .filter((x) => !['and', ''].includes(x))
+  .filter((x) => x.length > 2);
 
-fs.writeFile('entities.json', JSON.stringify(unique, null, 2), (err) => {
+const uniqueNames = [...new Set(splittedNames)];
+const uniqueLyricists = [...new Set(splittedLyricists)];
+
+const obj = {
+  artist_names: uniqueNames,
+  lyricist_names: uniqueLyricists,
+}
+
+fs.writeFile('entities.json', JSON.stringify(obj, null, 2), (err) => {
   if (err) {
     console.log(err);
   }
