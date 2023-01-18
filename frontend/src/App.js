@@ -37,7 +37,7 @@ function App() {
     if (searchTerm.length > 0) {
       setLoading(true);
       getSearchResults(searchTerm).then((data) => {
-        setHits(data.hits);
+        setHits(data?.response?.hits?.hits);
         console.log(data);
         setLoading(false);
       });

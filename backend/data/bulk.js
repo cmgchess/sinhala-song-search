@@ -29,6 +29,12 @@ const indexSettings = {
               "type": "custom",
               "tokenizer": "icu_tokenizer",
               "filter": ["customNgramFilter", "customStopWordFilter"]
+            },
+            "analyzerCaseInsensitive": {
+              "tokenizer": "whitespace",
+              "filter": [
+                "lowercase", "customStopWordFilter"
+              ]
             }
           },
           "filter": {
@@ -42,7 +48,7 @@ const indexSettings = {
               "type": "stop",
               "ignore_case": true,
               "stopwords": ["ගත්කරු", "රචකයා", "ලියන්නා", "ලියන", "රචිත", "ලියපු", "ලියව්‌ව", "රචනා", "රචක", "ලියන්", "ලිවූ", "ගායකයා", "ගයනවා", "ගායනා", "ගායනා", "ගැයු", "ගයන", "කිව්", "කිවු", "සංගීත", "සංගීතවත්", "සංගීතය", "වර්ගය", "වර්‍ගයේ", "වර්ගයේම", "වර්ගයේ", "වැනි", "ඇතුලත්", "ඇතුලු", "විදියේ", "විදිහේ", "හොඳම", "ජනප්‍රිය", "ප්‍රචලිත", "ප්‍රසිද්ධම", "හොදම", "ජනප්‍රියම", "ලස්සනම", "ගීත", "සිංදු", "ගී", "සින්දු", "like", "about"
-              , "similar","a","an","the","to","for","in","too","to","same","song","lyrics","artist","lyricist","album","singer","songwriter","composer","metaphor","meaning","containing","source","target","that","this","with"]
+              , "similar","a","an","and","the","to","for","in","too","to","same","song","lyrics","artist","lyricist","album","singer","songwriter","composer","metaphor","meaning","containing","source","target","that","this","with","by"]
             }
           }
         }
@@ -57,7 +63,7 @@ const indexSettings = {
                 "type": "keyword"
               }
             },
-            "analyzer": "my_analyzer"
+            "analyzer": "analyzerCaseInsensitive"
           },
           "artist": {
             "type": "text",
@@ -66,7 +72,7 @@ const indexSettings = {
                 "type": "keyword"
               }
             },
-            "analyzer": "my_analyzer"
+            "analyzer": "analyzerCaseInsensitive"
           },
           "album": {
             "type": "text",
@@ -75,7 +81,7 @@ const indexSettings = {
                 "type": "keyword"
               }
             },
-            "analyzer": "my_analyzer"
+            "analyzer": "analyzerCaseInsensitive"
           },
           "releasedYear": { "type": "integer" },
           "lyricist": {
@@ -85,13 +91,37 @@ const indexSettings = {
                 "type": "keyword"
               }
             },
-            "analyzer": "my_analyzer"
+            "analyzer": "analyzerCaseInsensitive"
           },
-          "lyrics": { "type": "text" },
+          "lyrics": { "type": "text"},
           "metaphor": { "type": "text" },
-          "meaning": { "type": "text" },
-          "source": { "type": "keyword" },
-          "target": { "type": "keyword" },
+          "meaning": { 
+            "type": "text",
+            "fields": {
+              "raw": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "analyzerCaseInsensitive"
+          },
+          "source": { 
+            "type": "text",
+            "fields": {
+              "raw": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "analyzerCaseInsensitive"
+           },
+          "target": {
+            "type": "text",
+            "fields": {
+              "raw": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "analyzerCaseInsensitive"
+          },
         }
       }
     }
