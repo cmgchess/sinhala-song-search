@@ -100,13 +100,15 @@ function App() {
           </div>
         )}
         {hits.length > 0 && !loading && (
-          <List spacing="1rem">
-            {hits.map((hit) => (
-              <ListItem key={`li-${hit._source.id}`}>
-                <SongCard hit={hit} />
-              </ListItem>
-            ))}
-          </List>
+          <React.Fragment>
+            <List spacing="1rem">
+              {hits.map((hit) => (
+                <ListItem key={`li-${hit._source.id}`}>
+                  <SongCard hit={hit} />
+                </ListItem>
+              ))}
+            </List>
+          </React.Fragment>
         )}
       </React.Fragment>
     </ChakraProvider>

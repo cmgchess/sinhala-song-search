@@ -42,7 +42,7 @@ export default function SongCard({ hit }) {
     <div>
       <Stack alignItems="center">
         <Button width={1000} onClick={onToggle}>
-          {hit?._source?.title} - {hit?._source?.artist}
+          {hit?._source?.title} - {hit?._source?.artist || 'N/A'}
         </Button>
       </Stack>
       <Collapse in={isOpen} animateOpacity>
