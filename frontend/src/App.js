@@ -18,6 +18,11 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [hits, setHits] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [albumAgg, setAlbumAgg] = useState([]);
+  const [artistAgg, setArtistAgg] = useState([]);
+  const [lyricistAgg, setLyricistAgg] = useState([]);
+  const [sourceAgg, setSourceAgg] = useState([]);
+  const [targetAgg, setTargetAgg] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
 
   const getSearchResults = async (query) => {
@@ -38,6 +43,11 @@ function App() {
       setLoading(true);
       getSearchResults(searchTerm).then((data) => {
         setHits(data?.response?.hits?.hits);
+        setAlbumAgg(data?.response?.aggregations?.album_filter?.buckets);
+        setArtistAgg(data?.response?.aggregations?.artist_filter?.buckets);
+        setLyricistAgg(data?.response?.aggregations?.lyricist_filter?.buckets);
+        setSourceAgg(data?.response?.aggregations?.source_filter?.buckets);
+        setTargetAgg(data?.response?.aggregations?.target_filter?.buckets);
         console.log(data);
         setLoading(false);
       });
