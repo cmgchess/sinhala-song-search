@@ -6,7 +6,7 @@ import {
   Button,
   Spinner,
   List,
-  ListItem, 
+  ListItem,
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import axios from 'axios';
@@ -96,7 +96,7 @@ function App() {
                 <SongCard hit={hit} />
               </ListItem>
             ))}
-          </List >
+          </List>
         )}
       </React.Fragment>
     </ChakraProvider>
