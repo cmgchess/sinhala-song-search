@@ -31,8 +31,9 @@
  - **Stop word filtering**
 	 - A [custom filter](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-stop-tokenfilter.html#analysis-stop-tokenfilter-customize) is used for stop word handling. Apart from the default english stop words used by Elasticsearch it is customized to remove certain common stop words that are relevant to the application. he `ignore_case` option is set to `true` which means that the filter will match the words in the `stopwords` array regardless of the case.
 - **Field boosting**
-	- Certain keywords have been used to [boost the relevant fields](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html#field-boost) such that they count more towards the relevance score of the query.
+	- Certain keywords and named entities have been used to [boost the relevant fields](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html#field-boost) such that they count more towards the relevance score of the query.
 		- Using words like 'written' in the search will boost the `lyricist` field.
 		- Using words like 'sung', 'performed' will boost the `artist` field.
 		- Using words like 'metaphors' in the search will boost the `source` and the `target` fields.
 		- Using words like 'meaning' will boost the `meaning` field.
+		- Using names in the named entity set will boost the `artist` and/or the `lyricist` fields accordingly. For example using the word 'Bathiya' in the search query will boost the `artist` field.
