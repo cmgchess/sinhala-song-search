@@ -103,7 +103,6 @@ const search = async (req, res) => {
   removingQueryWords.forEach((word) => {
     query = query.replace(word, '');
   });
-  console.log(removingQueryWords);
 
   const searchParams = {
     index: INDEX_NAME,
@@ -178,9 +177,7 @@ const search = async (req, res) => {
     },
   };
 
-  console.log(JSON.stringify(searchParams, null, 2));
   const response = await client.search(searchParams);
-  // console.log(JSON.stringify(response, null, 2));
   return res.status(200).json({ response });
 };
 

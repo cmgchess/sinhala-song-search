@@ -48,7 +48,6 @@ function App() {
         setLyricistAgg(data?.response?.aggregations?.lyricist_filter?.buckets);
         setSourceAgg(data?.response?.aggregations?.source_filter?.buckets);
         setTargetAgg(data?.response?.aggregations?.target_filter?.buckets);
-        console.log(data);
         setLoading(false);
       });
     }

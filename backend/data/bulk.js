@@ -29,12 +29,8 @@ const indexSettings = {
     settings: {
       analysis: {
         analyzer: {
-          my_analyzer: {
-            type: 'custom',
-            tokenizer: 'icu_tokenizer',
-            filter: ['customNgramFilter', 'customStopWordFilter'],
-          },
           analyzerCaseInsensitive: {
+            type: 'custom',
             tokenizer: 'whitespace',
             filter: ['lowercase', 'customStopWordFilter','customNgramFilter'],
           },
