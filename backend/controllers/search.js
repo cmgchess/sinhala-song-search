@@ -103,7 +103,6 @@ const search = async (req, res) => {
   removingQueryWords.forEach((word) => {
     query = query.replace(word, '');
   });
-  console.log(removingQueryWords);
 
   const searchParams = {
     index: INDEX_NAME,
