@@ -1,6 +1,20 @@
 
+
 ## Sinhala Song Search
  CS4642 - Data Mining & Information Retrieval
+
+### Dataset
+
+ - `title` - song title in English
+ - `artist` - artist name in English
+ - `album` - album name in English
+ - `releasedYear` - released year of the song
+ - `lyricist` - lyricist name in English
+ - `lyrics` - song lyrics in Sinhala
+ - `metaphor` - part of the song which contains a metaphor in Sinhala
+ - `meaning` - meaning of the metaphor in English
+ - `source` - source domain of the metaphor in English
+ - `target` - target domain of the metaphor in English
 
 ### Use cases
 
