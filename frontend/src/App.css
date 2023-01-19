@@ -1,0 +1,40 @@
+.App {
+  text-align: center;
+}
+
+
+.heading {
+  text-align: center; 
+}
+
+.remove-inherit {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.spinner-position{
+  position: absolute;
+  left: 50%;
+}
+
+
+
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.search-button {
+  margin-left: 10px;
+}
+
+
